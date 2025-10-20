@@ -8,6 +8,7 @@ import WishList from "./pages/WishList";
 import AddToCart from "./pages/AddToCart";
 import { WishListProvider } from "./context/WishListContext";
 import { AddToCartProvider } from "./context/AddToCartContext";
+import ProductView from "./pages/ViewDetails";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/shop" element={<Shop />} />
             <Route path="/wishlist" element={<WishList />} />
             <Route path="/addtocart" element={<AddToCart />} />
+            <Route path="/product/:id" element={<ProductView/>} />
           </Routes>
           <Footer />
      

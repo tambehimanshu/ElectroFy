@@ -10,20 +10,21 @@ import {
 } from "react-icons/fa";
 import { useWishList } from "../context/WishListContext";
 import { useAddToCart } from "../context/AddToCartContext";
+import { useNavigate } from "react-router-dom";
 
 function ProductCard({ product }) {
   if (!product) return null;
+    const navigate = useNavigate();
 
-const {addToCart} = useAddToCart()
-
+  const { addToCart } = useAddToCart();
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishList();
   const liked = isInWishlist(product.id);
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
- const images = product.images && product.images.length > 0 ? product.images : ["https://via.placeholder.com/400"];
-
-
+  
+    
+       
 
   const nextImage = () =>
     setCurrentImageIndex((prev) => (prev + 1) % images.length);
@@ -38,15 +39,13 @@ const {addToCart} = useAddToCart()
     else addToWishlist(product);
   };
 
-
-
   return (
     <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 relative">
-      {/* Image Carousel */}
+      {/* Image */}
       <div className="relative h-64">
         <img
-          src={images[currentImageIndex]}
-          alt={`${product.name} - View ${currentImageIndex + 1}`}
+          src={product.image}
+          alt={product.name}
           className="w-full h-full object-cover"
         />
 
@@ -62,34 +61,7 @@ const {addToCart} = useAddToCart()
         </button>
 
         {/* Carousel Controls */}
-        {images.length > 1 && (
-          <>
-            <button
-              onClick={prevImage}
-              aria-label="Previous Image"
-              className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/50 p-2 rounded-full text-white hover:bg-black/70"
-            >
-              <FaChevronLeft />
-            </button>
-            <button
-              onClick={nextImage}
-              aria-label="Next Image"
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/50 p-2 rounded-full text-white hover:bg-black/70"
-            >
-              <FaChevronRight />
-            </button>
-            <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
-              {images.map((_, idx) => (
-                <div
-                  key={idx}
-                  className={`h-2 w-2 rounded-full ${
-                    idx === currentImageIndex ? "bg-white" : "bg-white/50"
-                  }`}
-                />
-              ))}
-            </div>
-          </>
-        )}
+        
       </div>
 
       {/* Product Info */}
@@ -131,16 +103,14 @@ const {addToCart} = useAddToCart()
         {/* Buttons */}
         <div className="flex gap-2">
           <button
-            onClick={() =>
-              window.location.href = `/products/${product.slug || ""}`
-            }
+            onClick={()=>navigate(`/product/${product.id}`)}
             className="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition-colors duration-300 font-semibold flex items-center justify-center gap-2"
           >
             <FaEye /> View
           </button>
 
           <button
-            onClick={()=> addToCart(product)}
+            onClick={() => addToCart(product)}
             className="w-full bg-green-600 text-white py-3 rounded-xl hover:bg-green-700 transition-colors duration-300 font-semibold flex items-center justify-center gap-2"
           >
             <FaShoppingCart /> Add to Cart

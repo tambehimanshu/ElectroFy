@@ -1,8 +1,10 @@
 import React from "react";
 import { useWishList } from "../context/WishListContext";
+import { useNavigate } from "react-router-dom";
 
 function Wishlist() {
   const { wishList, removeFromWishlist } = useWishList();
+   const navigate = useNavigate();
 
   if (!wishList.length)
     return (
@@ -46,9 +48,7 @@ function Wishlist() {
             </div>
             <div className="flex gap-2">
               <button
-                onClick={() =>
-                  (window.location.href = `/products/${product.slug || ""}`)
-                }
+                  onClick={()=>navigate(`/product/${product.id}`)}
                 className="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition-colors duration-300 font-semibold flex items-center justify-center gap-2"
               >
                 View
