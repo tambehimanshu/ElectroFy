@@ -9,13 +9,13 @@ export const WishListProvider =({children})=>{
 
    const addToWishList = (item) => {
   console.log("Adding to wishlist:", item);
-  if (!wishList.find((wish) => wish.id === item.id)) {
+  if (!wishList.find((wish) => wish.slug === item.slug)) {
     setWishList([...wishList, item]);
   }
 };
 
-    const removeFromWishList =(id)=>{
-        setWishList(wishList.filter((item)=> item.id !== id));
+    const removeFromWishList =(slug)=>{
+        setWishList(wishList.filter((item)=> item.slug !== slug));
     }
 
     return (

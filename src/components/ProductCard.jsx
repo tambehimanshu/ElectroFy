@@ -1,12 +1,11 @@
-import React, { useState } from "react";
-import { FaChevronLeft, FaChevronRight, FaStar, FaRupeeSign, FaShoppingCart, FaHeart } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
+import { FaChevronLeft, FaChevronRight, FaStar, FaRupeeSign, FaShoppingCart, FaHeart, FaEye } from "react-icons/fa";
 import { useWishList } from "../context/WishListContext";
 
 function ProductCard({ product }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { wishList, addToWishList, removeFromWishList } = useWishList();
-
-  const liked = wishList.some((item) => item.slug === product.slug); // check if in wishlist
+  const [liked, setLiked] = useState(false);
 
   if (!product) return null;
 
@@ -16,6 +15,12 @@ function ProductCard({ product }) {
   const prevImage = () => setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
 
   const formatCurrency = (value) => new Intl.NumberFormat("en-IN").format(value);
+
+  // Update liked state whenever wishlist changes
+  useEffect(() => {
+    const isLiked = wishList.some((item) => item.slug === product.slug);
+    setLiked(isLiked);
+  }, [wishList, product.slug]);
 
   const handleWishlistClick = () => {
     if (liked) {
@@ -39,8 +44,8 @@ function ProductCard({ product }) {
         {/* Wishlist Heart Button */}
         <button
           onClick={handleWishlistClick}
-          className={`absolute top-2 right-2 p-2 rounded-full text-white text-lg ${
-            liked ? "bg-red-500" : "bg-black/50 hover:bg-black/70"
+          className={`absolute top-2 right-2 p-2 rounded-full text-white text-lg transition-all duration-300 ${
+            liked ? "bg-red-500 hover:bg-red-600" : "bg-black/50 hover:bg-black/70"
           }`}
         >
           <FaHeart />
@@ -103,13 +108,25 @@ function ProductCard({ product }) {
         )}
 
         {/* Buy Button */}
+        <div className="flex gap-2" >
+<button
+          onClick={() => window.location.href = `/products/${product.slug || ""}`}
+          className="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition-colors duration-300 font-semibold flex items-center justify-center gap-2"
+        >
+         <FaEye />
+          view
+        </button>
+        
         <button
           onClick={() => window.location.href = `/products/${product.slug || ""}`}
           className="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition-colors duration-300 font-semibold flex items-center justify-center gap-2"
         >
-          <FaShoppingCart />
-          Buy Now
+      <FaShoppingCart />
+          Add to cart
         </button>
+        
+        </div>
+        
       </div>
     </div>
   );

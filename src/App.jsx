@@ -7,6 +7,7 @@ import Shop from './pages/Shop'
 import { WishListProvider } from './context/WishListContext.jsx'
 import WishList from './pages/WishList.jsx'
 
+
 function App() {
   return (
     <BrowserRouter>
