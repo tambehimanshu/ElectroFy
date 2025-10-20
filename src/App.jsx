@@ -6,12 +6,15 @@ import Footer from './components/Footer'
 import Shop from './pages/Shop.jsx'
 import { WishListProvider } from './context/WishListContext.jsx'
 import WishList from './pages/WishList.jsx'
+import { AddToCartProvider } from './context/AddToCartContext.jsx'
+import AddToCart from './pages/AddToCart.jsx'
 
 
 function App() {
   return (
     <BrowserRouter>
     <WishListProvider>
+      <AddToCartProvider>
 
    
     <Navbar/>
@@ -19,8 +22,10 @@ function App() {
     <Route path='/' element={<Home/>} />
     <Route path='/shop' element={<Shop/>} />
       <Route path='/wishlist' element={<WishList/>} />
+      <Route path='/addtocart' element={<AddToCart/>} />
   </Routes>
   <Footer/>
+  </AddToCartProvider>
    </WishListProvider>
     </BrowserRouter>
   )

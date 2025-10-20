@@ -11,7 +11,7 @@ function Navbar() {
   const navLinks = [
     { to: "/", label: "Home", icon: <FaHome /> },
     { to: "/shop", label: "Shop", icon: <FaStore /> },
-    { to: "/cart", label: "Cart", icon: <FaShoppingCart /> },
+    { to: "/addtocart", label: "Cart", icon: <FaShoppingCart /> },
     {
       to: "/wishlist",
       label: "WishList",

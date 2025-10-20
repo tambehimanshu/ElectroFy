@@ -9,9 +9,12 @@ import {
   FaEye,
 } from "react-icons/fa";
 import { useWishList } from "../context/WishListContext";
+import { useAddToCart } from "../context/AddToCartContext";
 
 function ProductCard({ product }) {
   if (!product) return null;
+
+const {addToCart} = useAddToCart()
 
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishList();
   const liked = isInWishlist(product.id);
@@ -19,7 +22,7 @@ function ProductCard({ product }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
  const images = product.images && product.images.length > 0 ? product.images : ["https://via.placeholder.com/400"];
-<img src={images[currentImageIndex]} alt={product.name} />
+
 
 
   const nextImage = () =>
@@ -38,6 +41,7 @@ function ProductCard({ product }) {
   // Placeholder for Add to Cart functionality
   const handleAddToCart = () => {
     alert(`Add "${product.name}" to cart!`);
+    addToCart(product)
   };
 
   return (
