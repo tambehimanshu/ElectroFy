@@ -1,22 +1,118 @@
-import { FaCartPlus } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { FaChevronLeft, FaChevronRight, FaStar, FaRupeeSign, FaShoppingCart, FaHeart } from "react-icons/fa";
+import { useWishList } from "../context/WishListContext";
 
 function ProductCard({ product }) {
-  return (
-    <div className="border rounded-xl shadow-md hover:shadow-xl transition p-4">
-      <img src={product.image} alt={product.name} className="h-48 w-full object-cover rounded-md" />
-      <h2 className="text-xl font-semibold mt-3">{product.name}</h2>
-      <p className="text-gray-600">₹{product.price}</p>
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const { wishList, addToWishList, removeFromWishList } = useWishList();
 
-      <div className="flex justify-between items-center mt-3">
-        <button className="bg-blue-600 text-white px-3 py-1 rounded-lg flex items-center gap-2 hover:bg-blue-700">
-          <FaCartPlus /> Add to Cart
+  const liked = wishList.some((item) => item.slug === product.slug); // check if in wishlist
+
+  if (!product) return null;
+
+  const images = product.images && product.images.length ? product.images : ["https://images.unsplash.com/photo-1560518883-ce09059eeffa"];
+
+  const nextImage = () => setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  const prevImage = () => setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+
+  const formatCurrency = (value) => new Intl.NumberFormat("en-IN").format(value);
+
+  const handleWishlistClick = () => {
+    if (liked) {
+      removeFromWishList(product.slug);
+    } else {
+      addToWishList(product);
+    }
+  };
+
+  return (
+    <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 relative">
+      
+      {/* Image Carousel */}
+      <div className="relative h-64">
+        <img
+          src={images[currentImageIndex]}
+          alt={`${product.name} - View ${currentImageIndex + 1}`}
+          className="w-full h-full object-cover"
+        />
+
+        {/* Wishlist Heart Button */}
+        <button
+          onClick={handleWishlistClick}
+          className={`absolute top-2 right-2 p-2 rounded-full text-white text-lg ${
+            liked ? "bg-red-500" : "bg-black/50 hover:bg-black/70"
+          }`}
+        >
+          <FaHeart />
         </button>
-        <Link to={`/product/${product.id}`} className="text-blue-600 underline hover:text-blue-800">
-          View
-        </Link>
+
+        {images.length > 1 && (
+          <>
+            <button
+              onClick={prevImage}
+              className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/50 p-2 rounded-full text-white hover:bg-black/70"
+            >
+              <FaChevronLeft />
+            </button>
+            <button
+              onClick={nextImage}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/50 p-2 rounded-full text-white hover:bg-black/70"
+            >
+              <FaChevronRight />
+            </button>
+            <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
+              {images.map((_, idx) => (
+                <div
+                  key={idx}
+                  className={`h-2 w-2 rounded-full ${idx === currentImageIndex ? "bg-white" : "bg-white/50"}`}
+                />
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* Product Info */}
+      <div className="p-5">
+        <h2 className="text-xl font-bold text-gray-800 mb-2">{product.name || "No Name"}</h2>
+
+        {/* Rating */}
+        <div className="flex items-center mb-2">
+          {[...Array(5)].map((_, idx) => (
+            <FaStar
+              key={idx}
+              className={`mr-1 ${idx < (product.rating || 0) ? "text-yellow-400" : "text-gray-300"}`}
+            />
+          ))}
+          <span className="text-gray-500 ml-2 text-sm">({product.reviews || 0} reviews)</span>
+        </div>
+
+        {/* Price */}
+        <div className="flex items-center text-lg font-bold text-blue-600 mb-4">
+          <FaRupeeSign className="mr-1" />
+          {formatCurrency(product.price || 0)}
+        </div>
+
+        {/* Features */}
+        {product.features && (
+          <ul className="text-gray-600 mb-4 list-disc list-inside space-y-1">
+            {product.features.map((feature, idx) => (
+              <li key={idx}>{feature}</li>
+            ))}
+          </ul>
+        )}
+
+        {/* Buy Button */}
+        <button
+          onClick={() => window.location.href = `/products/${product.slug || ""}`}
+          className="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition-colors duration-300 font-semibold flex items-center justify-center gap-2"
+        >
+          <FaShoppingCart />
+          Buy Now
+        </button>
       </div>
     </div>
   );
 }
+
 export default ProductCard;
