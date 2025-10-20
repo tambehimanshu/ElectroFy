@@ -3,7 +3,7 @@ import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Footer from './components/Footer'
-import Shop from './pages/Shop'
+import Shop from './pages/Shop.jsx'
 import { WishListProvider } from './context/WishListContext.jsx'
 import WishList from './pages/WishList.jsx'
 

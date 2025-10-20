@@ -1,57 +1,64 @@
 import React from "react";
 import { useWishList } from "../context/WishListContext";
-import { FaRupeeSign } from "react-icons/fa";
 
-function WishList() {
-  const { wishList, removeFromWishList } = useWishList();
+function Wishlist() {
+  const { wishList, removeFromWishlist } = useWishList();
 
-  const formatCurrency = (value) => new Intl.NumberFormat("en-IN").format(value);
-
-  console.log("Rendering wishlist:", wishList);
+  if (!wishList.length)
+    return (
+      <div className="text-center mt-20">
+        <p className="text-lg mb-4">Your wishlist is empty.</p>
+        <a
+          href="/shop"
+          className="text-blue-600 hover:underline font-semibold"
+        >
+          Browse Products
+        </a>
+      </div>
+    );
 
   return (
-    <div className="mt-20 px-8">
-      <h2 className="text-2xl font-semibold mb-4">My Wishlist 💖</h2>
-
-      {wishList.length === 0 ? (
-        <p>No items in your wishlist yet.</p>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {wishList.map((item, index) => {
-            // fallback values
-            const id = item.slug || index; // fallback to index if slug missing
-            const name = item.name || "Unnamed Product";
-            const price = item.price || 0;
-            const image = item.images && item.images.length ? item.images[0] : "https://images.unsplash.com/photo-1560518883-ce09059eeffa";
-
-            return (
-              <div
-                key={id}
-                className="p-4 border rounded-lg shadow hover:shadow-lg transition"
+    <div className="mt-20 container mx-auto p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {wishList.map((product) => (
+        <div
+          key={product.id}
+          className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 relative"
+        >
+          <div className="relative h-64">
+       <img
+  src={product.images && product.images.length > 0 ? product.images[0] : "https://via.placeholder.com/150"}
+  alt={product.name}
+  className="w-full h-48 object-cover"
+/>
+            <button
+              onClick={() => removeFromWishlist(product.id)}
+              aria-label="Remove from wishlist"
+              className="absolute top-2 right-2 p-2 rounded-full bg-red-500 text-white text-lg hover:bg-red-600 transition"
+            >
+              ♥
+            </button>
+          </div>
+          <div className="p-5">
+            <h2 className="text-lg font-bold text-gray-800 mb-2">{product.name}</h2>
+            <div className="flex items-center text-blue-600 font-bold mb-2">
+              <span className="mr-1">₹</span>
+              {product.price?.toLocaleString() || "0"}
+            </div>
+            <div className="flex gap-2">
+              <button
+                onClick={() =>
+                  (window.location.href = `/products/${product.slug || ""}`)
+                }
+                className="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition-colors duration-300 font-semibold flex items-center justify-center gap-2"
               >
-                <img
-                  src={image}
-                  alt={name}
-                  className="w-full h-40 object-cover rounded mb-2"
-                />
-                <h3 className="text-lg font-medium">{name}</h3>
-                <div className="flex items-center text-blue-600 font-bold my-2">
-                  <FaRupeeSign className="mr-1" />
-                  {formatCurrency(price)}
-                </div>
-                <button
-                  onClick={() => removeFromWishList(item.slug)}
-                  className="mt-2 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-                >
-                  Remove
-                </button>
-              </div>
-            );
-          })}
+                View
+              </button>
+            </div>
+          </div>
         </div>
-      )}
+      ))}
     </div>
   );
 }
 
-export default WishList;
+export default Wishlist;

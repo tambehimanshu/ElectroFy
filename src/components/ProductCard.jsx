@@ -1,38 +1,47 @@
-import React, { useState, useEffect } from "react";
-import { FaChevronLeft, FaChevronRight, FaStar, FaRupeeSign, FaShoppingCart, FaHeart, FaEye } from "react-icons/fa";
+import React, { useState } from "react";
+import {
+  FaChevronLeft,
+  FaChevronRight,
+  FaStar,
+  FaRupeeSign,
+  FaShoppingCart,
+  FaHeart,
+  FaEye,
+} from "react-icons/fa";
 import { useWishList } from "../context/WishListContext";
 
 function ProductCard({ product }) {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const { wishList, addToWishList, removeFromWishList } = useWishList();
-  const [liked, setLiked] = useState(false);
-
   if (!product) return null;
 
-  const images = product.images && product.images.length ? product.images : ["https://images.unsplash.com/photo-1560518883-ce09059eeffa"];
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishList();
+  const liked = isInWishlist(product.id);
 
-  const nextImage = () => setCurrentImageIndex((prev) => (prev + 1) % images.length);
-  const prevImage = () => setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const formatCurrency = (value) => new Intl.NumberFormat("en-IN").format(value);
+ const images = product.images && product.images.length > 0 ? product.images : ["https://via.placeholder.com/400"];
+<img src={images[currentImageIndex]} alt={product.name} />
 
-  // Update liked state whenever wishlist changes
-  useEffect(() => {
-    const isLiked = wishList.some((item) => item.slug === product.slug);
-    setLiked(isLiked);
-  }, [wishList, product.slug]);
+
+  const nextImage = () =>
+    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  const prevImage = () =>
+    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+
+  const formatCurrency = (value) =>
+    new Intl.NumberFormat("en-IN").format(value);
 
   const handleWishlistClick = () => {
-    if (liked) {
-      removeFromWishList(product.slug);
-    } else {
-      addToWishList(product);
-    }
+    if (liked) removeFromWishlist(product.id);
+    else addToWishlist(product);
+  };
+
+  // Placeholder for Add to Cart functionality
+  const handleAddToCart = () => {
+    alert(`Add "${product.name}" to cart!`);
   };
 
   return (
     <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 relative">
-      
       {/* Image Carousel */}
       <div className="relative h-64">
         <img
@@ -41,9 +50,10 @@ function ProductCard({ product }) {
           className="w-full h-full object-cover"
         />
 
-        {/* Wishlist Heart Button */}
+        {/* Wishlist Heart */}
         <button
           onClick={handleWishlistClick}
+          aria-label={liked ? "Remove from wishlist" : "Add to wishlist"}
           className={`absolute top-2 right-2 p-2 rounded-full text-white text-lg transition-all duration-300 ${
             liked ? "bg-red-500 hover:bg-red-600" : "bg-black/50 hover:bg-black/70"
           }`}
@@ -51,16 +61,19 @@ function ProductCard({ product }) {
           <FaHeart />
         </button>
 
+        {/* Carousel Controls */}
         {images.length > 1 && (
           <>
             <button
               onClick={prevImage}
+              aria-label="Previous Image"
               className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/50 p-2 rounded-full text-white hover:bg-black/70"
             >
               <FaChevronLeft />
             </button>
             <button
               onClick={nextImage}
+              aria-label="Next Image"
               className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/50 p-2 rounded-full text-white hover:bg-black/70"
             >
               <FaChevronRight />
@@ -69,7 +82,9 @@ function ProductCard({ product }) {
               {images.map((_, idx) => (
                 <div
                   key={idx}
-                  className={`h-2 w-2 rounded-full ${idx === currentImageIndex ? "bg-white" : "bg-white/50"}`}
+                  className={`h-2 w-2 rounded-full ${
+                    idx === currentImageIndex ? "bg-white" : "bg-white/50"
+                  }`}
                 />
               ))}
             </div>
@@ -79,17 +94,23 @@ function ProductCard({ product }) {
 
       {/* Product Info */}
       <div className="p-5">
-        <h2 className="text-xl font-bold text-gray-800 mb-2">{product.name || "No Name"}</h2>
+        <h2 className="text-xl font-bold text-gray-800 mb-2">
+          {product.name || "No Name"}
+        </h2>
 
         {/* Rating */}
         <div className="flex items-center mb-2">
           {[...Array(5)].map((_, idx) => (
             <FaStar
               key={idx}
-              className={`mr-1 ${idx < (product.rating || 0) ? "text-yellow-400" : "text-gray-300"}`}
+              className={`mr-1 ${
+                idx < (product.rating || 0) ? "text-yellow-400" : "text-gray-300"
+              }`}
             />
           ))}
-          <span className="text-gray-500 ml-2 text-sm">({product.reviews || 0} reviews)</span>
+          <span className="text-gray-500 ml-2 text-sm">
+            ({product.reviews || 0} reviews)
+          </span>
         </div>
 
         {/* Price */}
@@ -107,26 +128,24 @@ function ProductCard({ product }) {
           </ul>
         )}
 
-        {/* Buy Button */}
-        <div className="flex gap-2" >
-<button
-          onClick={() => window.location.href = `/products/${product.slug || ""}`}
-          className="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition-colors duration-300 font-semibold flex items-center justify-center gap-2"
-        >
-         <FaEye />
-          view
-        </button>
-        
-        <button
-          onClick={() => window.location.href = `/products/${product.slug || ""}`}
-          className="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition-colors duration-300 font-semibold flex items-center justify-center gap-2"
-        >
-      <FaShoppingCart />
-          Add to cart
-        </button>
-        
+        {/* Buttons */}
+        <div className="flex gap-2">
+          <button
+            onClick={() =>
+              window.location.href = `/products/${product.slug || ""}`
+            }
+            className="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition-colors duration-300 font-semibold flex items-center justify-center gap-2"
+          >
+            <FaEye /> View
+          </button>
+
+          <button
+            onClick={handleAddToCart}
+            className="w-full bg-green-600 text-white py-3 rounded-xl hover:bg-green-700 transition-colors duration-300 font-semibold flex items-center justify-center gap-2"
+          >
+            <FaShoppingCart /> Add to Cart
+          </button>
         </div>
-        
       </div>
     </div>
   );
