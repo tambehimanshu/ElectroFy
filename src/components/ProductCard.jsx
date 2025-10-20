@@ -38,11 +38,7 @@ const {addToCart} = useAddToCart()
     else addToWishlist(product);
   };
 
-  // Placeholder for Add to Cart functionality
-  const handleAddToCart = () => {
-    alert(`Add "${product.name}" to cart!`);
-    addToCart(product)
-  };
+
 
   return (
     <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 relative">
@@ -144,7 +140,7 @@ const {addToCart} = useAddToCart()
           </button>
 
           <button
-            onClick={handleAddToCart}
+            onClick={()=> addToCart(product)}
             className="w-full bg-green-600 text-white py-3 rounded-xl hover:bg-green-700 transition-colors duration-300 font-semibold flex items-center justify-center gap-2"
           >
             <FaShoppingCart /> Add to Cart
