@@ -11,7 +11,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white relative overflow-hidden">
+    <footer className=" bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white relative overflow-hidden">
       {/* Decorative background blobs */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-10 left-10 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl"></div>

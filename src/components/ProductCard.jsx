@@ -31,14 +31,14 @@ function ProductCard({ product }) {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 relative">
-      {/* Image */}
-      <div className="relative h-64">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-full h-full object-cover"
-        />
+     <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 relative">
+    {/* Image */}
+    <div className="relative h-64 w-full bg-gray-100 flex items-center justify-center overflow-hidden">
+      <img
+        src={product.image}
+        alt={product.name || "Product"}
+        className="w-full h-full object-contain transition-transform duration-500 hover:scale-105"
+      />
 
         {/* Wishlist Heart */}
         <button

@@ -4,9 +4,9 @@ import ScrollingBar from "../components/ScrollingBar";
 function Home() {
   const navigate = useNavigate();
   return (
-    <div className="flex flex-col">
+    <div className="flex  flex-1 flex-col">
       {/* Hero Section */}
-      <div className="relative mt-16 flex flex-col items-center justify-center h-[90vh] text-center bg-gradient-to-r from-blue-500 to-indigo-600 text-white overflow-hidden">
+      <div className="relative mt-16 flex flex-col items-center justify-center h-[100vh] text-center bg-gradient-to-r from-blue-500 to-indigo-600 text-white overflow-hidden">
         <h1 className="text-5xl md:text-6xl font-extrabold mb-4 animate-fadeIn">
           Welcome to ElectroFy
         </h1>
@@ -16,7 +16,7 @@ function Home() {
         <ScrollingBar />
         <button
           onClick={() => navigate("/shop")}
-          className="mt-6 px-8 py-3 rounded-xl font-semibold bg-white text-blue-600 hover:bg-yellow-300 hover:text-black transition-transform transform hover:scale-105"
+          className=" mt-10 relative overflow-hidden rounded-[0.6em] px-10 py-3 text-[15px] font-sans border-2 border-[#d8f5e9] text-[#dcf1e8] tracking-wider leading-[1.4em] shadow-[inset_0_0_10px_rgba(27,253,156,0.4),0_0_9px_3px_rgba(27,253,156,0.1)] transition-all duration-300 bg-[linear-gradient(to_right,rgba(27,253,156,0.1)_1%,transparent_40%,transparent_60%,rgba(27,253,156,0.1)_100%)] hover:text-[#82ffc9] hover:shadow-[inset_0_0_10px_rgba(27,253,156,0.6),0_0_9px_3px_rgba(27,253,156,0.2)] before:absolute before:top-0 before:left-[-4em] before:h-full before:w-16 before:bg-[linear-gradient(to_right,transparent_1%,rgba(27,253,156,0.1)_40%,rgba(27,253,156,0.1)_60%,transparent_100%)] before:transition-transform before:duration-400 hover:before:translate-x-[15em]"
         >
           Shop Now
         </button>

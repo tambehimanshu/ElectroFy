@@ -37,7 +37,7 @@ function Payment() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-100 via-indigo-100 to-purple-100 py-10 px-5">
+    <div className="mt-10 min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-100 via-indigo-100 to-purple-100 py-10 px-5">
       <div className="bg-white shadow-2xl rounded-2xl p-8 w-full max-w-md">
         <h2 className="text-3xl font-semibold text-gray-800 text-center mb-6">
           <FaCreditCard className="inline text-indigo-600 mr-2" />

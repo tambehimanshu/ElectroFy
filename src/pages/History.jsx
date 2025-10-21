@@ -8,7 +8,7 @@ function History() {
 
   if (paymentHistory.length === 0)
     return (
-      <div className="text-center mt-20">
+      <div className="text-center">
         <p className="text-lg mb-4 text-gray-700">No payment history found.</p>
         <a
           href="/shop"
@@ -20,7 +20,8 @@ function History() {
     );
 
   return (
-    <div className="mt-20 container mx-auto p-4">
+      <main className="flex-1 p-4">
+    <div className="mt-40 mb-20 container mx-auto p-4">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-3xl font-bold text-gray-800">Payment History</h2>
         <button
@@ -60,6 +61,7 @@ function History() {
         ))}
       </div>
     </div>
+    </main>
   );
 }
 

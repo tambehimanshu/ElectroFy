@@ -13,6 +13,7 @@ import Payment from "./pages/Payment";
 import PaymentSuccess from "./pages/PaymentSuccesser";
 import History from "./pages/History";
 import { PaymentProvider } from "./context/PaymentContext";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -31,6 +32,8 @@ function App() {
             <Route path="/payment" element={<Payment/>} />
             <Route path="/payment-success" element={<PaymentSuccess/>} />
             <Route path="/payment-history" element={<History/>} />
+            <Route path="/" element={<Login/>} />
+
           </Routes>
           <Footer />
      </PaymentProvider>

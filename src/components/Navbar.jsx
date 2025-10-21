@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FaHome, FaStore, FaShoppingCart, FaHistory, FaHeart } from "react-icons/fa";
 import { MdMenu } from "react-icons/md";
 import { useWishList } from "../context/WishListContext";
 
 function Navbar() {
+  const navigate = useNavigate()
   const [mobileOpen, setMobileOpen] = useState(false);
   const { wishList } = useWishList();
 
@@ -28,8 +29,10 @@ function Navbar() {
           to={link.to}
           onClick={() => isMobile && setMobileOpen(false)} 
           className={({ isActive }) =>
-            `flex items-center gap-2 hover:text-gray-700 transition ${
-              isActive ? "text-gray-700 font-semibold" : ""
+            `relative flex flex-col items-center gap-1 px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-300 transform hover:scale-105 ${
+              isActive
+                ? "text-white bg-gradient-to-t from-slate-900 scale-110"
+                : "text-gray-400 hover:text-white hover:bg-gray-800"
             }`
           }
         >
@@ -55,8 +58,10 @@ function Navbar() {
         </nav>
 
         {/* SignUp Button */}
-        <button className="hidden md:block bg-[#a7a7a7] text-white py-3 px-8 rounded-full font-medium hover:bg-gray-700 transition-all duration-500">
-          SignUp
+        <button  
+        onClick={()=>navigate('/*')}
+        className=" relative overflow-hidden rounded-[0.6em] px-10 py-3 text-[15px] font-sans border-2 border-[#d8f5e9] text-[#dcf1e8] tracking-wider leading-[1.4em] shadow-[inset_0_0_10px_rgba(27,253,156,0.4),0_0_9px_3px_rgba(27,253,156,0.1)] transition-all duration-300 bg-[linear-gradient(to_right,rgba(27,253,156,0.1)_1%,transparent_40%,transparent_60%,rgba(27,253,156,0.1)_100%)] hover:text-[#82ffc9] hover:shadow-[inset_0_0_10px_rgba(27,253,156,0.6),0_0_9px_3px_rgba(27,253,156,0.2)] before:absolute before:top-0 before:left-[-4em] before:h-full before:w-16 before:bg-[linear-gradient(to_right,transparent_1%,rgba(27,253,156,0.1)_40%,rgba(27,253,156,0.1)_60%,transparent_100%)] before:transition-transform before:duration-400 hover:before:translate-x-[15em]">
+        Login
         </button>
 
         {/* Mobile Menu Toggle */}
