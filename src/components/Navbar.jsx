@@ -28,6 +28,9 @@ function Navbar() {
         <NavLink
           to={link.to}
           onClick={() => isMobile && setMobileOpen(false)} 
+           data-aos="fade-down"
+     data-aos-easing="linear"
+     data-aos-duration="700"
           className={({ isActive }) =>
             `relative flex flex-col items-center gap-1 px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-300 transform hover:scale-105 ${
               isActive
@@ -47,10 +50,15 @@ function Navbar() {
     ));
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white shadow-md">
+    <header className="fixed top-0 left-0 w-full z-50 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white shadow-md cursor-pointer">
       <div className="container mx-auto flex items-center justify-between px-6 py-4">
         {/* Brand */}
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-light">ElectroFy</h1>
+        <h1 
+        onClick={()=>navigate("/")}
+        data-aos="fade-down"
+     data-aos-easing="linear"
+     data-aos-duration="1000"
+      className="text-3xl md:text-4xl lg:text-5xl font-light">ElectroFy</h1>
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex">
@@ -60,7 +68,10 @@ function Navbar() {
         {/* SignUp Button */}
         <button  
         onClick={()=>navigate('/*')}
-        className=" relative overflow-hidden rounded-[0.6em] px-10 py-3 text-[15px] font-sans border-2 border-[#d8f5e9] text-[#dcf1e8] tracking-wider leading-[1.4em] shadow-[inset_0_0_10px_rgba(27,253,156,0.4),0_0_9px_3px_rgba(27,253,156,0.1)] transition-all duration-300 bg-[linear-gradient(to_right,rgba(27,253,156,0.1)_1%,transparent_40%,transparent_60%,rgba(27,253,156,0.1)_100%)] hover:text-[#82ffc9] hover:shadow-[inset_0_0_10px_rgba(27,253,156,0.6),0_0_9px_3px_rgba(27,253,156,0.2)] before:absolute before:top-0 before:left-[-4em] before:h-full before:w-16 before:bg-[linear-gradient(to_right,transparent_1%,rgba(27,253,156,0.1)_40%,rgba(27,253,156,0.1)_60%,transparent_100%)] before:transition-transform before:duration-400 hover:before:translate-x-[15em]">
+        data-aos="fade-down"
+     data-aos-easing="linear"
+     data-aos-duration="1000"
+        className="hidden md:block relative overflow-hidden rounded-[0.6em] px-10 py-3 text-[15px] font-sans border-2 border-[#d8f5e9] text-[#dcf1e8] tracking-wider leading-[1.4em] shadow-[inset_0_0_10px_rgba(27,253,156,0.4),0_0_9px_3px_rgba(27,253,156,0.1)] transition-all duration-300 bg-[linear-gradient(to_right,rgba(27,253,156,0.1)_1%,transparent_40%,transparent_60%,rgba(27,253,156,0.1)_100%)] hover:text-[#82ffc9] hover:shadow-[inset_0_0_10px_rgba(27,253,156,0.6),0_0_9px_3px_rgba(27,253,156,0.2)] before:absolute before:top-0 before:left-[-4em] before:h-full before:w-16 before:bg-[linear-gradient(to_right,transparent_1%,rgba(27,253,156,0.1)_40%,rgba(27,253,156,0.1)_60%,transparent_100%)] before:transition-transform before:duration-400 hover:before:translate-x-[15em]">
         Login
         </button>
 

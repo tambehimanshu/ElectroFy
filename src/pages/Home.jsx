@@ -4,7 +4,9 @@ import ScrollingBar from "../components/ScrollingBar";
 function Home() {
   const navigate = useNavigate();
   return (
-    <div className="flex  flex-1 flex-col">
+    <div 
+    data-aos="fade-up"
+    className="flex  flex-1 flex-col">
       {/* Hero Section */}
       <div className="relative mt-16 flex flex-col items-center justify-center h-[100vh] text-center bg-gradient-to-r from-blue-500 to-indigo-600 text-white overflow-hidden">
         <h1 className="text-5xl md:text-6xl font-extrabold mb-4 animate-fadeIn">
@@ -27,7 +29,7 @@ function Home() {
 
       {/* Features Section */}
       <div className="py-16 px-4 md:px-20 bg-gray-50 text-gray-800">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Why Choose ElectroMart?</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Why Choose ElectroFy?</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-2xl transition">
             <h3 className="font-semibold text-xl mb-2">Fast Delivery 🚚</h3>

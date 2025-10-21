@@ -11,34 +11,43 @@ import {
 import { useWishList } from "../context/WishListContext";
 import { useAddToCart } from "../context/AddToCartContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function ProductCard({ product }) {
   if (!product) return null;
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const { addToCart } = useAddToCart();
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishList();
   const liked = isInWishlist(product.id);
 
-
-
   const formatCurrency = (value) =>
     new Intl.NumberFormat("en-IN").format(value);
 
   const handleWishlistClick = () => {
-    if (liked) removeFromWishlist(product.id);
-    else addToWishlist(product);
+    if (liked) {
+      removeFromWishlist(product.id);
+      toast.error(`product succeffully removed from wishlist!`);
+    } else {
+      addToWishlist(product);
+      toast.success(`product successfully added to wishlist!`);
+    }
+  };
+
+  const handleAddToCart = () => {
+    addToCart(product);
+    toast.success(`product Successfully added to cart!`);
   };
 
   return (
-     <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 relative">
-    {/* Image */}
-    <div className="relative h-64 w-full bg-gray-100 flex items-center justify-center overflow-hidden">
-      <img
-        src={product.image}
-        alt={product.name || "Product"}
-        className="w-full h-full object-contain transition-transform duration-500 hover:scale-105"
-      />
+    <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 relative">
+      {/* Image */}
+      <div className="relative h-64 w-full bg-gray-100 flex items-center justify-center overflow-hidden">
+        <img
+          src={product.image}
+          alt={product.name || "Product"}
+          className="w-full h-full object-contain transition-transform duration-500 hover:scale-105"
+        />
 
         {/* Wishlist Heart */}
         <button
@@ -50,9 +59,6 @@ function ProductCard({ product }) {
         >
           <FaHeart />
         </button>
-
-        {/* Carousel Controls */}
-        
       </div>
 
       {/* Product Info */}
@@ -94,14 +100,14 @@ function ProductCard({ product }) {
         {/* Buttons */}
         <div className="flex gap-2">
           <button
-            onClick={()=>navigate(`/product/${product.id}`)}
+            onClick={() => navigate(`/product/${product.id}`)}
             className="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition-colors duration-300 font-semibold flex items-center justify-center gap-2"
           >
             <FaEye /> View
           </button>
 
           <button
-            onClick={() => addToCart(product)}
+            onClick={handleAddToCart}
             className="w-full bg-green-600 text-white py-3 rounded-xl hover:bg-green-700 transition-colors duration-300 font-semibold flex items-center justify-center gap-2"
           >
             <FaShoppingCart /> Add to Cart

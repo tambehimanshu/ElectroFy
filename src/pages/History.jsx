@@ -20,8 +20,10 @@ function History() {
     );
 
   return (
-      <main className="flex-1 p-4">
-    <div className="mt-40 mb-20 container mx-auto p-4">
+     
+    <div 
+    data-aos="fade-up"
+    className=" mt-40 mb-20 container mx-auto p-4">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-3xl font-bold text-gray-800">Payment History</h2>
         <button
@@ -61,7 +63,7 @@ function History() {
         ))}
       </div>
     </div>
-    </main>
+ 
   );
 }
 

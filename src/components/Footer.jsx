@@ -1,13 +1,17 @@
 import React from "react";
+import { FaXTwitter } from 'react-icons/fa6';
+import { FaInstagram } from 'react-icons/fa';
+import { FaGithub } from 'react-icons/fa6';
+import { FaLinkedinIn } from 'react-icons/fa6';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { name: "Twitter", href: "#", icon: "🐦" },
-    { name: "Instagram", href: "#", icon: "📸" },
-    { name: "Facebook", href: "#", icon: "📘" },
-    { name: "LinkedIn", href: "#", icon: "💼" },
+    { name: "Twitter", href: "#", icon: <FaXTwitter/> },
+    { name: "Instagram", href: "#", icon: <FaInstagram/> },
+    { name: "Github", href: "#", icon:<FaGithub/> },
+    { name: "LinkedIn", href: "#", icon: <FaLinkedinIn/>},
   ];
 
   return (
@@ -39,10 +43,10 @@ const Footer = () => {
                 <span className="text-green-600">✉️</span> hello@beyondwhy.com
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-green-600">📞</span> +1 (555) 123-4567
+                <span className="text-green-600">📞</span> +91 xxxxxx100
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-green-600">📍</span> New York, NY
+                <span className="text-green-600">📍</span> Pune,India
               </div>
             </div>
           </div>

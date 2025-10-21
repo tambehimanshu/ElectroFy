@@ -24,7 +24,9 @@ function ProductView() {
   const totalPrice = product.price * quantity;
 
   return (
-    <div className="mt-40 px-4 md:px-20 flex flex-col md:flex-row gap-12">
+    <div
+    data-aos="fade-up"
+    className=" mt-40 px-4 md:px-20 flex flex-col md:flex-row gap-12">
       {/* Product Image */}
       <div className="flex-1 flex justify-center items-center">
         <div className="w-full max-w-md h-[400px] bg-gray-100 flex items-center justify-center rounded-xl shadow-lg overflow-hidden">

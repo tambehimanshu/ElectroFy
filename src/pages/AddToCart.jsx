@@ -2,6 +2,7 @@ import React from "react";
 import { useAddToCart } from "../context/AddToCartContext";
 import { useNavigate } from "react-router-dom";
 import { FaPlus, FaMinus } from "react-icons/fa";
+import { toast } from "react-toastify"; // ✅ Import toast
 
 function AddToCart() {
   const { cart, removeFromCart, updateQuantity } = useAddToCart();
@@ -20,6 +21,18 @@ function AddToCart() {
       </div>
     );
 
+  // Handler for remove with toast
+  const handleRemove = (productId, productName) => {
+    removeFromCart(productId);
+    toast.error(`${productName} removed from cart!`); // 🔔 Show toast
+  };
+
+  // Optional: handler for quantity change
+  const handleQuantityChange = (productId, newQty, productName) => {
+    updateQuantity(productId, newQty);
+    toast.info(`${productName} quantity updated to ${newQty}`);
+  };
+
   // Calculate total cart price
   const totalCartPrice = cart.reduce(
     (acc, product) => acc + (product.price * (product.quantity || 1)),
@@ -27,7 +40,7 @@ function AddToCart() {
   );
 
   return (
-    <div className="mt-40 container mx-auto p-4">
+    <div data-aos="fade-up" className="mt-40 container mx-auto p-4">
       <h1 className="text-3xl font-bold text-center mb-8">Your Cart</h1>
 
       {/* Cart Items Grid */}
@@ -45,7 +58,7 @@ function AddToCart() {
                 className="w-full h-full object-contain transition-transform duration-500 hover:scale-105"
               />
               <button
-                onClick={() => removeFromCart(product.id)}
+                onClick={() => handleRemove(product.id, product.name)}
                 aria-label="Remove from cart"
                 className="absolute top-2 right-2 p-2 rounded-full bg-red-500 text-white text-lg hover:bg-red-600 transition"
               >
@@ -67,7 +80,11 @@ function AddToCart() {
               <div className="flex items-center gap-2 mt-2">
                 <button
                   onClick={() =>
-                    updateQuantity(product.id, Math.max((product.quantity || 1) - 1, 1))
+                    handleQuantityChange(
+                      product.id,
+                      Math.max((product.quantity || 1) - 1, 1),
+                      product.name
+                    )
                   }
                   className="px-2 py-1 bg-gray-200 rounded-full hover:bg-gray-300 transition"
                 >
@@ -76,7 +93,11 @@ function AddToCart() {
                 <span className="text-lg font-semibold">{product.quantity || 1}</span>
                 <button
                   onClick={() =>
-                    updateQuantity(product.id, (product.quantity || 1) + 1)
+                    handleQuantityChange(
+                      product.id,
+                      (product.quantity || 1) + 1,
+                      product.name
+                    )
                   }
                   className="px-2 py-1 bg-gray-200 rounded-full hover:bg-gray-300 transition"
                 >
