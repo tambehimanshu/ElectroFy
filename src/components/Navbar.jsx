@@ -18,7 +18,7 @@ function Navbar() {
       icon: <FaHeart />,
       badge: wishList.length, // display number of wishlist items
     },
-    { to: "/history", label: "History", icon: <FaHistory /> },
+    { to: "/payment-history", label: "History", icon: <FaHistory /> },
   ];
 
   const renderLinks = () =>

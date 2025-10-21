@@ -18,7 +18,7 @@ function ProductView() {
   if (!product) return <p className="text-center mt-20">Loading...</p>;
 
   return (
-    <div className="mt-20 px-4 md:px-20 flex flex-col md:flex-row gap-12">
+    <div className=" mt-20 px-4 md:px-20 flex flex-col md:flex-row gap-12">
       {/* Product Image */}
       <div className="flex-1 flex justify-center items-center">
         <img
@@ -29,7 +29,7 @@ function ProductView() {
       </div>
 
       {/* Product Details */}
-      <div className="flex-1 flex flex-col gap-4">
+      <div className=" mb-20 flex-1 flex flex-col gap-4">
         <h1 className="text-4xl font-bold">{product.name}</h1>
         <div className="flex items-center gap-2 text-yellow-500">
           {[...Array(product.rating)].map((_, i) => (
@@ -45,6 +45,7 @@ function ProductView() {
         {/* Buttons */}
         <div className="mt-6 flex gap-4">
           <button
+          onClick={()=>navigate('/payment')}
             className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
           >
             Buy Now

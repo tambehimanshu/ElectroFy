@@ -20,16 +20,7 @@ function ProductCard({ product }) {
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishList();
   const liked = isInWishlist(product.id);
 
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  
-    
-       
-
-  const nextImage = () =>
-    setCurrentImageIndex((prev) => (prev + 1) % images.length);
-  const prevImage = () =>
-    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
 
   const formatCurrency = (value) =>
     new Intl.NumberFormat("en-IN").format(value);
