@@ -36,25 +36,15 @@ Below are some real screenshots from the Electrofy project 👇
 ![History Page](src/assets/screenshots/HistoryPage.png)
 
 
-> 🧩 Make sure your images are placed in:
-> ```
-> /assets/screenshots/
-> ├── home.png
-> ├── product.png
-> └── cart.png
-> ```
-
----
-
 ## 🎥 Demo Video
 
 Watch a short demo of the project in action 👇  
 
-<video src="src/assets/screenshots/Screen Recording 2025-10-22 090315.mp4" width="700" controls></video>
+<video src="src/assets/screenshots/demo.mp4" width="700" controls></video>
 
 > 🎬 Place your video inside:
 > ```
-> /assets/videos/
+> /assets/screenshot
 > └── demo.mp4
 > ```
 
