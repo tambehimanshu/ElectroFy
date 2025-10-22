@@ -21,19 +21,20 @@ Electrofy is a full-featured e-commerce web app where users can:
 Below are some real screenshots from the Electrofy project 👇  
 
 ### 🏠 Home Page
-![Home Page](../ElectroFy/src/assets/screenshots/homePage.png)
+![Home Page](src/assets/screenshots/homePage.png)
 
 ### 📱 Product Details Page
-![Product Page](../ElectroFy/src/assets/screenshots/ShopPage.png)
+![Product Page](src/assets/screenshots/ShopPage.png)
 
 ### 🛒 Cart Page
-![Cart Page](../ElectroFy/src/assets/screenshots/AddToCartpage.png)
+![Cart Page](src/assets/screenshots/AddToCartpage.png)
 
 ### 🛒 WishList Page
-![Cart Page](../ElectroFy/src/assets/screenshots/wishListPage2.png)
+![WishList Page](src/assets/screenshots/wishListPage2.png)
 
 ### 🛒 History Page
-![Cart Page](../ElectroFy/src/assets/screenshots/HistoryPage.png)
+![History Page](src/assets/screenshots/HistoryPage.png)
+
 
 > 🧩 Make sure your images are placed in:
 > ```
@@ -49,7 +50,7 @@ Below are some real screenshots from the Electrofy project 👇
 
 Watch a short demo of the project in action 👇  
 
-<video src="../ElectroFy/src/assets/screenshots/ElectroFy.mp4" width="700" controls></video>
+<video src="src/assets/screenshots/Screen Recording 2025-10-22 090315.mp4" width="700" controls></video>
 
 > 🎬 Place your video inside:
 > ```
