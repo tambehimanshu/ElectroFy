@@ -44,7 +44,7 @@ function App() {
             <Route path="/payment" element={<Payment/>} />
             <Route path="/payment-success" element={<PaymentSuccess/>} />
             <Route path="/payment-history" element={<History/>} />
-            <Route path="/" element={<Login/>} />
+            <Route path="/login" element={<Login/>} />
             
           </Routes>
           </main>

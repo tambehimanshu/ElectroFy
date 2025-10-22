@@ -58,7 +58,7 @@ function Navbar() {
         data-aos="fade-down"
      data-aos-easing="linear"
      data-aos-duration="1000"
-      className="text-3xl md:text-4xl lg:text-5xl font-light">ElectroFy</h1>
+      className="text-3xl md:text-4xl lg:text-5xl font-light "><b>ElectroFy</b></h1>
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex">
@@ -67,7 +67,7 @@ function Navbar() {
 
         {/* SignUp Button */}
         <button  
-        onClick={()=>navigate('/*')}
+        onClick={()=>navigate('/login')}
         data-aos="fade-down"
      data-aos-easing="linear"
      data-aos-duration="1000"

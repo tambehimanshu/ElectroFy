@@ -29,7 +29,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between gap-8">
             {/* Brand Section */}
             <div>
-              <h2 className="text-2xl font-bold mb-4">Beyond Why</h2>
+              <h2 className="text-2xl font-bold mb-4">ExploreTeam</h2>
               <p className="text-gray-300 mb-6 leading-relaxed">
                 Empowering young minds through science, creativity, and
                 curiosity. <br /> Join our global community of young researchers
@@ -40,7 +40,7 @@ const Footer = () => {
             {/* Contact Info */}
             <div className="space-y-3 text-gray-300 text-sm md:text-base">
               <div className="flex items-center gap-2">
-                <span className="text-green-600">✉️</span> hello@beyondwhy.com
+                <span className="text-green-600">✉️</span> hello@exploreteam.com
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-green-600">📞</span> +91 xxxxxx100
@@ -72,7 +72,7 @@ const Footer = () => {
           {/* Copyright */}
           <div className="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-6 text-gray-400 text-sm">
             <div className="flex items-center gap-2">
-              <span>© {currentYear} Beyond Why.</span>
+              <span>© {currentYear} ExploreTeam.</span>
               <span className="text-green-600">💚</span>
               <span>Made for young minds</span>
             </div>
